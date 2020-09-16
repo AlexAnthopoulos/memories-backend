@@ -44,3 +44,5 @@ const Memory = new Schema(
     timestamps: true,
   }
 );
+
+module.exports = model("Memories", userSchema);
