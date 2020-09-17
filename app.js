@@ -8,6 +8,10 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const User = require("./models/User.model");
+const session = require("express-session");
+const passport = require("passport");
+require("./configs/passport");
 
 const app_name = require("./package.json").name;
 const debug = require("debug")(
@@ -40,10 +44,26 @@ app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
+//Add Sesion settings here :
+app.use(
+  session({
+    secret: "8PXZPuAN|RO-a,{w~cG@W[FQFn>$W$",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+//Passport initialize and passport session here:
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // default value for title local
 app.locals.title = "Express - Generated with IronGenerator";
 
 const index = require("./routes/index");
 app.use("/", index);
+const authRoutes = require("./routes/auth-routes");
+app.use("/api", authRoutes);
 
 module.exports = app;

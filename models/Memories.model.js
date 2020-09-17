@@ -1,6 +1,7 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const Memory = new Schema(
+const memoriesSchema = new Schema(
   {
     title: {
       type: String,
@@ -29,10 +30,14 @@ const Memory = new Schema(
     latitude: {
       type: Number,
       required: true,
+      min: -90,
+      max: 90,
     },
     longitude: {
       type: Number,
       required: true,
+      min: -180,
+      max: 180,
     },
     memoryDate: {
       required: true,
@@ -45,4 +50,4 @@ const Memory = new Schema(
   }
 );
 
-module.exports = model("Memories", userSchema);
+const Memories = mongoose.model("Memories", memoriesSchema);
