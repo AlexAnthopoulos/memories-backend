@@ -11,6 +11,7 @@ const path = require("path");
 const User = require("./models/User.model");
 const session = require("express-session");
 const passport = require("passport");
+const cors = require("cors");
 require("./configs/passport");
 
 const app_name = require("./package.json").name;
@@ -22,6 +23,12 @@ const app = express();
 
 // require database configuration
 require("./configs/db.config");
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000"],
+  })
+);
 
 // Middleware Setup
 app.use(logger("dev"));
