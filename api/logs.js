@@ -1,8 +1,6 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const { router } = require("../app");
+const { Router } = require("express");
+const router = Router();
 const Memory = require("../models/Memories.model");
-const User = require("../models/User.model");
 
 router.get("/memories", async (req, res, next) => {
   try {

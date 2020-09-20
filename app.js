@@ -1,4 +1,5 @@
 require("dotenv").config();
+const logs = require("./api/logs");
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -35,6 +36,7 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use("/api/logs", logs);
 
 // Express View engine setup
 
