@@ -18,15 +18,6 @@ router.get("/logs", (req, res, next) => {
   // }
 });
 router.post("/logs", (req, res, next) => {
-  const {
-    title,
-    comments,
-    desciption,
-    image,
-    memoryDate,
-    latitude,
-    longitude,
-  } = req.body;
   Memory.create(req.body)
     .then((response) => {
       res.send(response);
