@@ -43,7 +43,7 @@ const memoriesSchema = new Schema(
       required: true,
       type: Date,
     },
-    user: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    user: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,

@@ -1,8 +1,11 @@
 const { Router } = require("express");
+const mongoose = require("mongoose");
 const router = Router();
 const Memory = require("../models/Memories.model");
 
 router.get("/logs", (req, res, next) => {
+  //console.log("Logs get: The body is: ", req.body);
+  console.log("Logs get: The user is ", req.user);
   Memory.find()
     .then((results) => {
       res.send(results);
@@ -17,8 +20,42 @@ router.get("/logs", (req, res, next) => {
   //   next(error);
   // }
 });
+
+router.get("/userlogs", (req, res, next) => {
+  //console.log("Logs get: The body is: ", req.body);
+  console.log("Logs get: The user is ", req.user);
+  Memory.find({
+    user: mongoose.Types.ObjectId(req.user._id),
+  })
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.delete("/userlogs/:id", (req, res, next) => {
+  // req.params.id
+  console.log("Logs delete:", req.params.id);
+  console.log("Logs get: The user is ", req.user);
+  Memory.findByIdAndDelete(req.params.id)
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.post("/logs", (req, res, next) => {
-  Memory.create(req.body)
+  console.log("Logs : The body is Memories: ", req.body);
+  console.log("Logs: The user is ", req.user);
+  const newMemory = {
+    ...req.body,
+    user: mongoose.Types.ObjectId(req.user._id),
+  };
+  Memory.create(newMemory)
     .then((response) => {
       res.send(response);
     })

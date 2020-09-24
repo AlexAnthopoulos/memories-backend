@@ -36,7 +36,6 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/api", logs);
 
 // Express View engine setup
 
@@ -75,5 +74,6 @@ app.use("/", index);
 const authRoutes = require("./routes/auth-routes");
 app.use("/api", authRoutes);
 app.use("/api", require("./routes/file-upload-routes"));
+app.use("/api", logs);
 
 module.exports = app;
