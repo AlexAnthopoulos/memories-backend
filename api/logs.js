@@ -51,6 +51,7 @@ router.delete("/userlogs/:id", (req, res, next) => {
 router.post("/logs", (req, res, next) => {
   console.log("Logs : The body is Memories: ", req.body);
   console.log("Logs: The user is ", req.user);
+  console.log("This is the request ", req);
   const newMemory = {
     ...req.body,
     user: mongoose.Types.ObjectId(req.user._id),
