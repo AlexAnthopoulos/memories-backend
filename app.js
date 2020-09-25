@@ -27,7 +27,7 @@ require("./configs/db.config");
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000"],
+    origin: process.env.FRONTEND_POINT,
   })
 );
 
@@ -55,7 +55,7 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 //Add Sesion settings here :
 app.use(
   session({
-    secret: "8PXZPuAN|RO-a,{w~cG@W[FQFn>$W$",
+    secret: process.env.SESSION_KEY,
     resave: true,
     saveUninitialized: true,
   })
