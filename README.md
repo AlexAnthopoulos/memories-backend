@@ -10,8 +10,10 @@ Memories Project Back-End.
  - Mongoose
  - BcryptJS
  - Passport
+ - Multer
+ - Cloudinary
  
- ## Instal dependencies
+ ## Install dependencies
  
  ```
  yarn
