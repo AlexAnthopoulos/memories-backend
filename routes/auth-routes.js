@@ -11,7 +11,7 @@ authRoutes.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
-  console.log(req.body);
+
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
     return;
@@ -46,7 +46,7 @@ authRoutes.post("/signup", (req, res, next) => {
       //Email was required according to schema had to be put here.
       email: email,
     });
-    console.log(aNewUser);
+    
     aNewUser.save((err) => {
       if (err) {
         console.log(err);
